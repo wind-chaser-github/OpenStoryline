@@ -43,6 +43,10 @@
 **FireRed-OpenStoryline** turns complex video creation into natural, intuitive conversations. Designed with both accessibility and enterprise-grade reliability in mind, FireRed-OpenStoryline makes video creation easy and friendly to beginners and creative enthusiasts alike.
 > Deriving from the saying "A single spark can start a prairie fire", the name FireRed represents our vision: to spread our SOTA capabilities—honed in real-world scenarios—like sparks across the wilderness, igniting the imagination of developers worldwide to reshape the future of AI together.
 
+## Fork handoff / 接手说明
+
+This fork retains the upstream workflow with one output-collision fix. AI editing acceptance is **not complete**. See [the handoff guide](docs/handoff/README.md) for changes, verified failures, cost records, offline tests, and next steps.
+
 ## ✨ Key Features
 - 🌐 **Smart Media Search & Organization**: Automatically searches online and downloads images and video clips that match your requirements. Performs clip segmentation and content understanding based on your thematic media.
 - ✍️ **Intelligent Script Generation**: Combines user themes, visual understanding, and emotion recognition to automatically construct storylines and context-aware narration. Features built-in Few-shot style transfer capabilities, allowing users to define specific copy styles (e.g., product reviews, casual vlogs) via reference text, achieving precise replication of tone, rhythm, and sentence structure.

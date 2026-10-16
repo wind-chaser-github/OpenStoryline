@@ -73,3 +73,8 @@ data/**
 !data/prompts/
 !data/prompts/**
 resource/**
+# Local-only model resource link and private experiment evidence
+/iic
+/local-experiments/
+/config.local.toml
+/config.*.local.toml

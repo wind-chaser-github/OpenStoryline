@@ -57,6 +57,8 @@ class SpeechRoughCutNode(BaseNode):
         output_directory = self._prepare_output_directory(node_state, inputs)
         llm = node_state.llm
         rough_cut_jsons, clips = [], []
+        # All source clips share this directory; never reuse an output filename.
+        next_segment_index = 0
 
         # Load system prompt for rough cut
         system_prompt = get_prompt("speech_rough_cut.system", lang=node_state.lang)
@@ -110,7 +112,7 @@ class SpeechRoughCutNode(BaseNode):
 
             # Group sentences into segments and compute cut points
             filtered_segments = []
-            for clip_index, item in enumerate(ranges):
+            for clip_index, item in enumerate(ranges, start=next_segment_index):
                 segment = cut_video_segment_with_ffmpeg(
                     video_path=video_path,
                     start=item["start"] / 1000,
@@ -119,6 +121,7 @@ class SpeechRoughCutNode(BaseNode):
                     ffmpeg_executable=self.ffmpeg_executable
                 )
                 filtered_segments.append(segment)
+                next_segment_index += 1
 
             # Compute deleted ranges and recalibrate ASR timestamps
             deleted_ranges = self.compute_deleted_ranges(filtered_segments)
@@ -127,9 +130,8 @@ class SpeechRoughCutNode(BaseNode):
 
 
             # Generate final clip metadata
-            clip_index = 0
             for segment in filtered_segments:
-                clip_id = self._format_clip_id(clip_index)
+                clip_id = self._format_clip_id(len(clips))
                 start_ms = max(0, int(round(segment.start_seconds * MILLISECONDS_PER_SECOND)))
                 end_ms = max(start_ms, int(round(segment.end_seconds * MILLISECONDS_PER_SECOND)))
                 duration_ms = max(0, end_ms - start_ms)
@@ -151,7 +153,6 @@ class SpeechRoughCutNode(BaseNode):
                     },
                 })
                 node_state.node_summary.info_for_user(f"{clip_id} split successfully", preview_urls=[str(segment.path)])
-                clip_index += 1
 
         return {"clips": clips, "rough_cut_jsons": rough_cut_jsons}
 

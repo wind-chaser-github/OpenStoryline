@@ -1,0 +1,91 @@
+{
+  "overall_acceptance": false,
+  "official_commit": "c9e945215586f45c12a61c1951ee9a8e9c43a027",
+  "official_tracked_files_unchanged_during_run": 141,
+  "only_existing_patch": "speech_rough_cut.py unique output file and clip IDs",
+  "llm_model": "gpt-4.1",
+  "vlm_model": "gpt-4.1",
+  "usage": {
+    "input_tokens": 129818,
+    "output_tokens": 2987,
+    "total_tokens": 132805
+  },
+  "metered_calls": 27,
+  "unmetered_calls": "Two official credential-validation probes with max_tokens=1; not included in 132805. No model calls during offline audit/restart.",
+  "corrective_turns": 0,
+  "paid_reruns": 0,
+  "source_unchanged": true,
+  "calls_by_category": {
+    "agent": {
+      "calls": 10,
+      "tokens": 74192
+    },
+    "visual_understanding": {
+      "calls": 15,
+      "tokens": 52761
+    },
+    "filter": {
+      "calls": 1,
+      "tokens": 1958
+    },
+    "group": {
+      "calls": 1,
+      "tokens": 3894
+    }
+  },
+  "evidence_scope": "Sanitized historical results, not a new live run; raw logs and private video remain local.",
+  "source": {
+    "duration_seconds": 186.32576,
+    "width": 854,
+    "height": 480
+  },
+  "selection": {
+    "selected": [
+      "clip_0001",
+      "clip_0002",
+      "clip_0003",
+      "clip_0004",
+      "clip_0005",
+      "clip_0006",
+      "clip_0007",
+      "clip_0008",
+      "clip_0009",
+      "clip_0010",
+      "clip_0011",
+      "clip_0012",
+      "clip_0013",
+      "clip_0014"
+    ],
+    "count": 14,
+    "minimum_retained_clips_from_official_80percent_rule": 12,
+    "minimum_whole_clip_duration_seconds": 152.79999999999998,
+    "model_response": "All 14 keep=true; not a parse fallback",
+    "raw_request_response": "filter-call.json (redacted excerpt)"
+  },
+  "subtitles": {
+    "asr_clips": 14,
+    "timeline_subtitles": 0,
+    "generate_script": {
+      "group_scripts": [],
+      "title": ""
+    },
+    "reason": "Agent did not request script/subtitle generation or speech rough cut. Official normal timeline takes subtitle_units from generate_script, not local_asr."
+  },
+  "history": {
+    "items": 12,
+    "equal_after_web_restart": true,
+    "artifact_hashes_equal": true,
+    "render_result_in_history": false,
+    "render_note": "User-requested stop-on-failure interrupted render tool receipt; cached file is not a registered successful result."
+  },
+  "render": {
+    "duration_seconds": 186.267007,
+    "decode_pass": true,
+    "original_audio_matches_all_14_clips": true,
+    "accepted_final_video": false,
+    "registered_render_artifacts": 0,
+    "preview_http_status": 403,
+    "cancelled_after_semantic_failure_detected": true
+  },
+  "scope": "Local test only. No business integration or deployment."
+}

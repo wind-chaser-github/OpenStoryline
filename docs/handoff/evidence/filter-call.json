@@ -1,0 +1,37 @@
+{
+  "scope": "Excerpt from actual call 23; clip captions and private paths omitted. The system prompt below is verbatim upstream text.",
+  "call_number": 23,
+  "model": "gpt-4.1",
+  "official_system_prompt": "# Role\n你是一名专业的视频素材筛选助手。你需要根据画面的描述、美学评分和时长，从一堆素材中挑选出最适合剪辑的片段。\n\n# Goal\n输出一个JSON结果，包含最终保留的视频片段ID列表。\n\n# Constraints (筛选规则 - 请严格按顺序执行)\n\n**第一步：计算“最多能删几个” (硬性数量指标)**\n请先统计输入片段的总数量，记为【总数】。\n1. **如果【总数】少于或等于 5 个**：\n   - 禁止删除任何片段，必须全部保留。\n2. **如果【总数】大于 5 个**：\n   - 你必须保证最终保留的片段数量 **严格大于** 【总数】的 80%。\n     - *（例如：总数是7个，7 x 0.8 = 5.6，保留数量必须大于5.6，即至少保留6个，意味着最多只能删 1 个）。*\n   - 同时，保留的数量也不能少于 5 个。\n\n**第二步：执行筛选 (内容质量优化)**\n只有在第一步计算出“有删除名额”的情况下，才进行此步。如果第一步要求全保留，则直接跳过此步。\n1. 阅读所有 `clip_captions`片段信息，找出画面描述**高度相似**（几乎一模一样）的片段组。\n2. 在这些相似片段中，对比 `aes_score` (美学分) 和 `duration` (时长)：\n   - **优先保留**：美学分高的、时长适中的。\n   - **考虑删除**：美学分低的、或者时长过短导致无法使用的。\n3. **注意**：删除的数量绝对不能超过第一步计算出的“最大删除名额”。如果名额用完了，即使还有相似片段也不允许再删。",
+  "user_requirement": "根据原声内容，筛选出2-3颗行星的完整、有价值的特点介绍片段，去掉开场、重复铺垫和结尾，确保主语和上下文清楚，总时长控制在45-70秒。",
+  "clip_durations_seconds": [
+    16.8,
+    11.133,
+    16.667,
+    15.733,
+    16.667,
+    5.067,
+    16.666,
+    13.067,
+    16.667,
+    8.933,
+    16.667,
+    9.4,
+    16.666,
+    6.134
+  ],
+  "raw_assistant_content": "```json\n{\n  \"results\": [\n    {\"clip_id\": \"clip_0001\", \"keep\": true},\n    {\"clip_id\": \"clip_0002\", \"keep\": true},\n    {\"clip_id\": \"clip_0003\", \"keep\": true},\n    {\"clip_id\": \"clip_0004\", \"keep\": true},\n    {\"clip_id\": \"clip_0005\", \"keep\": true},\n    {\"clip_id\": \"clip_0006\", \"keep\": true},\n    {\"clip_id\": \"clip_0007\", \"keep\": true},\n    {\"clip_id\": \"clip_0008\", \"keep\": true},\n    {\"clip_id\": \"clip_0009\", \"keep\": true},\n    {\"clip_id\": \"clip_0010\", \"keep\": true},\n    {\"clip_id\": \"clip_0011\", \"keep\": true},\n    {\"clip_id\": \"clip_0012\", \"keep\": true},\n    {\"clip_id\": \"clip_0013\", \"keep\": true},\n    {\"clip_id\": \"clip_0014\", \"keep\": true}\n  ]\n}\n```",
+  "usage": {
+    "input_tokens": 1721,
+    "output_tokens": 237,
+    "total_tokens": 1958,
+    "input_token_details": {
+      "audio": 0,
+      "cache_read": 0
+    },
+    "output_token_details": {
+      "audio": 0,
+      "reasoning": 0
+    }
+  }
+}
